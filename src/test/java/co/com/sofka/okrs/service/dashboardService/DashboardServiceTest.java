@@ -95,7 +95,7 @@ class DashboardServiceTest {
     public void findAdvanceOkrByOkrId(){
         when(repositoryOKR.findById("6084801fb2ce1e4174af0245")).thenReturn(TestUtils.getMonoOkr());
         StepVerifier.create(dashboardService.findAdvanceOkrByOkrId("6084801fb2ce1e4174af0245")).
-                expectNext(0.68f).verifyComplete();
+                expectNext(68.0f).verifyComplete();
     }
 
     @Test

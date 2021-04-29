@@ -9,7 +9,7 @@ import java.util.Objects;
 @Document
 public class Okr {
 
-    @Id
+
     private String id;
     private String title;
     private String objective;
@@ -21,6 +21,7 @@ public class Okr {
     private Date startDate;
     private Float advanceOkr;
     private List<HistoricalAdvance> historicalOkr;
+
 
     public Okr(String id, String title, String objective, String personInChargeNameOkr, String personInChargeEmailOkr, String userId, String descriptionOkr, String vertical, Float advanceOkr, List<HistoricalAdvance> historicalOkr) {
         this.id = id;
