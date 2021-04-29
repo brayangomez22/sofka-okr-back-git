@@ -9,7 +9,6 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class ServiceKr  {
-
     @Autowired
     private RepositoryKr repositoryKr;
 
@@ -18,11 +17,7 @@ public class ServiceKr  {
     }
 
     public Mono<Kr> save(Kr kr) {
-        repositoryKr.findAll().filter(x -> x.getId() == kr.getId());
-        {
-            repositoryKr.deleteById(kr.getId());
-            return repositoryKr.save(kr);
-        }
+        return repositoryKr.save(kr);
     }
 
         public Mono<Void> delete (String id){

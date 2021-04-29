@@ -5,7 +5,6 @@ import co.com.sofka.okrs.domain.Kr;
 import co.com.sofka.okrs.repository.RepositoryKr;
 import co.com.sofka.okrs.repository.RepositoryOkr;
 import co.com.sofka.okrs.repository.UserRepository;
-import co.com.sofka.okrs.service.dashboardService.DashboardService;
 import co.com.sofka.okrs.service.servicePlanification.ServiceKr;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.http.HttpHeaders;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -22,10 +22,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import java.net.http.HttpHeaders;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
@@ -71,7 +69,7 @@ class ControllerKrTest {
 
         when(repositoryKr.save(kr)).thenReturn(Mono.just(kr));
 
-        webTestClient.post().uri("/Krs/postKrs").contentType(MediaType.APPLICATION_JSON)
+        webTestClient.post().uri("/Krs/postkr").contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromObject(kr)).exchange().expectStatus().isCreated();
 
         Mockito.verify(repositoryKr, times(1)).save(kr);

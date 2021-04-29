@@ -64,9 +64,9 @@ public class TestUtils {
 
     public static Mono<Okr> getMonoOkr(){
         List<HistoricalAdvance> historical = new ArrayList<>();
-        historical.add(new HistoricalAdvance(0f));
-        historical.add(new HistoricalAdvance(0.4f));
-        historical.add(new HistoricalAdvance(0.68f));
+        historical.add(new HistoricalAdvance( "01",0f));
+        historical.add(new HistoricalAdvance("02",0.4f));
+        historical.add(new HistoricalAdvance("03",0.68f));
 
         return Mono.just(new Okr(
                 "6084801fb2ce1e4174af0245", "xxxxxx",

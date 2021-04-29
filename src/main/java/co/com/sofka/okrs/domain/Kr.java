@@ -3,6 +3,7 @@ package co.com.sofka.okrs.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
+import java.util.Objects;
 
 @Document
 public class Kr {
@@ -120,5 +121,18 @@ public class Kr {
 
     public void setDescriptionKr(String descriptionKr) {
         this.descriptionKr = descriptionKr;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Kr kr = (Kr) o;
+        return Objects.equals(id, kr.id) && Objects.equals(okrId, kr.okrId) && Objects.equals(keyResult, kr.keyResult) && Objects.equals(personInChargeNameKr, kr.personInChargeNameKr) && Objects.equals(personInChargeEmailKr, kr.personInChargeEmailKr) && Objects.equals(startDate, kr.startDate) && Objects.equals(finishDate, kr.finishDate) && Objects.equals(advanceKr, kr.advanceKr) && Objects.equals(percentageWeight, kr.percentageWeight) && Objects.equals(descriptionKr, kr.descriptionKr);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, okrId, keyResult, personInChargeNameKr, personInChargeEmailKr, startDate, finishDate, advanceKr, percentageWeight, descriptionKr);
     }
 }

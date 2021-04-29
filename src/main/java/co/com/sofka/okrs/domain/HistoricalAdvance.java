@@ -7,10 +7,14 @@ import java.util.Date;
 public class HistoricalAdvance {
 
     @Id
+    private String id;
     private Date dateUpdate;
     private Float newAdvance;
 
-    public HistoricalAdvance(Float newAdvance) {
+
+
+    public HistoricalAdvance(String id,Float newAdvance) {
+        this.id = id;
         this.dateUpdate = new Date();
         this.newAdvance = newAdvance;
     }
@@ -25,5 +29,9 @@ public class HistoricalAdvance {
 
     public void setNewAdvance(Float newAdvance) {
         this.newAdvance = newAdvance;
+    }
+
+    public String getId() {
+        return id;
     }
 }
