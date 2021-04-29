@@ -8,22 +8,18 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-public class ServiceOkr implements IServiceOkr{
+public class ServiceOkr{
     @Autowired
     private RepositoryOkr repositoryOKr;
 
-
-    @Override
     public Flux<Okr> findAll() {
         return repositoryOKr.findAll();
     }
 
-    @Override
     public Mono<Okr> save(Okr okr) {
         return repositoryOKr.save(okr);
     }
 
-    @Override
     public Mono<Okr> update(Okr okr) {
         repositoryOKr.findAll().filter(x -> x.getId() == okr.getId());{
             repositoryOKr.deleteById(okr.getId());
@@ -31,8 +27,8 @@ public class ServiceOkr implements IServiceOkr{
         return repositoryOKr.save(okr);
     }
 
-    @Override
     public Mono<Void> delete(String id) {
         return repositoryOKr.deleteById(id);
     }
+    
 }

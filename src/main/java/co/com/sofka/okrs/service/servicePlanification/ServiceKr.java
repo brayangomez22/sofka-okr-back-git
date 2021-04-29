@@ -8,18 +8,15 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-public class ServiceKr implements IServiceKr {
+public class ServiceKr  {
 
     @Autowired
     private RepositoryKr repositoryKr;
 
-
-    @Override
     public Flux<Kr> findAll() {
         return repositoryKr.findAll();
     }
 
-    @Override
     public Mono<Kr> save(Kr kr) {
         repositoryKr.findAll().filter(x -> x.getId() == kr.getId());
         {
@@ -28,7 +25,6 @@ public class ServiceKr implements IServiceKr {
         }
     }
 
-        @Override
         public Mono<Void> delete (String id){
             return repositoryKr.deleteById(id);
         }
