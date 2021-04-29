@@ -9,5 +9,4 @@ import reactor.core.publisher.Flux;
 public interface RepositoryKr extends ReactiveMongoRepository<Kr, String> {
 
     Flux<Kr> findByOkrId(String okrId);
-
 }

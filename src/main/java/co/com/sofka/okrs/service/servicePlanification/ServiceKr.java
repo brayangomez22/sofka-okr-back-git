@@ -19,9 +19,14 @@ public class ServiceKr  {
     public Mono<Kr> save(Kr kr) {
         return repositoryKr.save(kr);
     }
-
-        public Mono<Void> delete (String id){
+    public Mono<Void> delete (String id){
             return repositoryKr.deleteById(id);
         }
+
+    public Flux<Kr> findByOkrId(String okrId) {
+        return repositoryKr.findByOkrId(okrId);
     }
+
+
+}
 
