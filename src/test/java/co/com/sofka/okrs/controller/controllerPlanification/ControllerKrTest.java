@@ -69,17 +69,10 @@ class ControllerKrTest {
 
         when(repositoryKr.save(kr)).thenReturn(Mono.just(kr));
 
-        webTestClient.post().uri("/Krs/postkr").contentType(MediaType.APPLICATION_JSON)
+        webTestClient.post().uri("/Krs/postKr").contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromObject(kr)).exchange().expectStatus().isCreated();
 
         Mockito.verify(repositoryKr, times(1)).save(kr);
     }
 
-    @Test
-    void update() {
-    }
-
-    @Test
-    void delete() {
-    }
 }

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
+
 @Service
 public class ServiceKr  {
     @Autowired
@@ -17,7 +19,7 @@ public class ServiceKr  {
     }
 
     public Mono<Kr> save(Kr kr) {
-        return repositoryKr.save(kr);
+        return repositoryKr.save(Objects.requireNonNull(kr));
     }
 
         public Mono<Void> delete (String id){

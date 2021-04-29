@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
@@ -47,7 +48,7 @@ class ServiceKrTest {
         Kr kr = new Kr("0001", "01", "KeyResult1", "Jhovan Espinal",
                 "jhovan@sofkau.com", new Date(), new Date(), 0F, 20F, "descripion");
 
-        when(repositoryKr.save(kr)).thenReturn(Mono.just(kr));
+        when(repositoryKr.findAll()).thenReturn(Flux.just(kr));
 
         StepVerifier.create(serviceKr.findAll()).expectNext(kr).verifyComplete();
 
