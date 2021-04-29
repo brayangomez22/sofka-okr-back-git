@@ -22,6 +22,12 @@ public class ServiceKr  {
         return repositoryKr.save(Objects.requireNonNull(kr));
     }
 
+    public Mono<Kr> update(Kr kr) {
+        return repositoryKr.save(kr);
+    }
 
+        public Mono<Void> delete (String id){
+            return repositoryKr.deleteById(id);
+        }
     }
 
