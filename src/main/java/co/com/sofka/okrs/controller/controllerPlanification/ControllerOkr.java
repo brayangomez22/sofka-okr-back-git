@@ -28,7 +28,7 @@ public class ControllerOkr {
 
     @PutMapping("/updOkr")
     public Mono<Okr> update(@RequestBody Okr okr){
-        return  userService.save(okr);
+        return  userService.update(okr);
     }
 
     @DeleteMapping("/deleteOkr/{id}")

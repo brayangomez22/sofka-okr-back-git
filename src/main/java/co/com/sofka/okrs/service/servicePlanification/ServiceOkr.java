@@ -14,12 +14,9 @@ public class ServiceOkr{
     @Autowired
     private RepositoryOkr repositoryOKr;
 
-
-
     public Flux<Okr> findAll() {
         return repositoryOKr.findAll();
     }
-
 
     public Mono<Okr> save(Okr okr) {
         return repositoryOKr.save(Objects.requireNonNull(okr));
@@ -32,11 +29,8 @@ public class ServiceOkr{
         return repositoryOKr.save(okr);
     }
 
-
     public Mono<Void> delete(String id) {
         return repositoryOKr.deleteById(id);
     }
-
-
 
 }

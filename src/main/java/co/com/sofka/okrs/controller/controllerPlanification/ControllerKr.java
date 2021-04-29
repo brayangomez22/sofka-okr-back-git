@@ -5,6 +5,7 @@ import co.com.sofka.okrs.domain.Okr;
 import co.com.sofka.okrs.service.servicePlanification.ServiceKr;
 import co.com.sofka.okrs.service.servicePlanification.ServiceOkr;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -21,12 +22,13 @@ public class ControllerKr {
         return userService.findAll();
     }
 
-    @PostMapping("/postkr")
+    @PostMapping("/postKr")
+    @ResponseStatus(HttpStatus.CREATED)
     public Mono<Kr> save(@RequestBody Kr kr){
         return  userService.save(kr);
     }
 
-    @PutMapping("/updkr")
+    @PutMapping("/updKr")
     public Mono<Kr> update(@RequestBody Kr kr){
         return  userService.save(kr);
     }
