@@ -26,15 +26,7 @@ public class ControllerOkr {
         return userService.save(okr);
     }
 
-    @PutMapping("/updOkr")
-    public Mono<Okr> update(@RequestBody Okr okr){
-        return  userService.update(okr);
-    }
 
-    @DeleteMapping("/deleteOkr/{id}")
-    public Mono<Void> delete(@PathVariable("id") String id){
-        return  userService.delete(id);
-    }
 
 }
 

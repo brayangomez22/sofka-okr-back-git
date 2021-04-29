@@ -22,8 +22,6 @@ public class ServiceKr  {
         return repositoryKr.save(Objects.requireNonNull(kr));
     }
 
-        public Mono<Void> delete (String id){
-            return repositoryKr.deleteById(id);
-        }
+
     }
 

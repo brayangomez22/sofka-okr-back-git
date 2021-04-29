@@ -28,14 +28,5 @@ public class ControllerKr {
         return  userService.save(kr);
     }
 
-    @PutMapping("/updKr")
-    public Mono<Kr> update(@RequestBody Kr kr){
-        return  userService.save(kr);
-    }
-
-    @DeleteMapping("/deletekr/{id}")
-    public Mono<Void> delete(@PathVariable("id") String id){
-        return  userService.delete(id);
-    }
 
 }
