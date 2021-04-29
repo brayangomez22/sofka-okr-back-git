@@ -36,6 +36,7 @@ class UserControllerOKRTest {
     void saveUser(){
 
         User user = new User("xxx", "Juan","juan@example.com");
+        when(userRepository.findById("xxx")).thenReturn(Mono.empty());
         when(userRepository.save(user)).thenReturn(Mono.just(user));
         webTestClient.post().uri("/api/users").contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromObject(user)).exchange().expectStatus().isCreated();
