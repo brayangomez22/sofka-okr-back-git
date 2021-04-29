@@ -25,6 +25,18 @@ public class ServiceOkr{
         return repositoryOKr.save(Objects.requireNonNull(okr));
     }
 
+    public Mono<Okr> update(Okr okr) {
+        repositoryOKr.findAll().filter(x -> x.getId() == okr.getId());{
+            repositoryOKr.deleteById(okr.getId());
+        }
+        return repositoryOKr.save(okr);
+    }
+
+
+    public Mono<Void> delete(String id) {
+        return repositoryOKr.deleteById(id);
+    }
+
 
 
 }
