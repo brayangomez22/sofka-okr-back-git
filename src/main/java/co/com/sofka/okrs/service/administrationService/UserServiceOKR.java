@@ -15,15 +15,8 @@ public class UserServiceOKR {
     private UserRepository repository;
 
     public Mono<User> save(User user){
-       // return repository.findById(user.getId()).switchIfEmpty(repository.save(user));
-        return repository.
-                findById(user.getId()).map(user1 -> {
-                    System.out.println(user1);
-                    return user1;}).
-                switchIfEmpty(repository.save(user));
 
-
-
+        return repository.findById(user.getId()).switchIfEmpty(repository.save(user));
     }
 
 
