@@ -28,6 +28,7 @@ public class ControllerOkr {
     }
 
     @PutMapping("/updOkr")
+    @ResponseStatus(HttpStatus.CREATED)
     public Mono<Okr> update(@RequestBody Okr okr){
         return  userService.update(okr);
     }
@@ -35,6 +36,11 @@ public class ControllerOkr {
     @DeleteMapping("/deleteOkr/{id}")
     public Mono<Void> delete(@PathVariable("id") String id){
         return  userService.delete(id);
+    }
+
+    @PostMapping("/prueba")
+    public Mono<Okr> prueba(@RequestBody Okr okr){
+      return userService.updateAdvanceOkr(okr);
     }
 
 }

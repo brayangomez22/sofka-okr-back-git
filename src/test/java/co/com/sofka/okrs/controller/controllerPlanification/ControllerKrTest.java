@@ -2,6 +2,7 @@ package co.com.sofka.okrs.controller.controllerPlanification;
 
 import co.com.sofka.okrs.controller.dashboardController.ControladorDashboard;
 import co.com.sofka.okrs.domain.Kr;
+import co.com.sofka.okrs.domain.Okr;
 import co.com.sofka.okrs.repository.RepositoryKr;
 import co.com.sofka.okrs.repository.RepositoryOkr;
 import co.com.sofka.okrs.repository.UserRepository;
@@ -23,6 +24,7 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
@@ -70,6 +72,33 @@ class ControllerKrTest {
         when(repositoryKr.save(kr)).thenReturn(Mono.just(kr));
 
         webTestClient.post().uri("/Krs/postKr").contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromObject(kr)).exchange().expectStatus().isCreated();
+
+        Mockito.verify(repositoryKr, times(1)).save(kr);
+    }
+
+    @Test
+    void deleteKr(){
+
+
+        when(repositoryKr.deleteById("xxx")).thenReturn(Mono.empty());
+
+        webTestClient.delete().uri("/Krs/deleteKr".concat("/{id}"),"xxx")
+                .accept(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE))
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(Void.class);
+    }
+
+    @Test
+    void updateKr() {
+
+        Kr kr = new Kr("0001", "01", "KeyResult1", "Jhovan Espinal",
+                "jhovan@sofkau.com", new Date(), new Date(), 0F, 20F, "descripion");
+
+        when(repositoryKr.save(kr)).thenReturn(Mono.just(kr));
+
+        webTestClient.put().uri("/Krs/updKr").contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromObject(kr)).exchange().expectStatus().isCreated();
 
         Mockito.verify(repositoryKr, times(1)).save(kr);

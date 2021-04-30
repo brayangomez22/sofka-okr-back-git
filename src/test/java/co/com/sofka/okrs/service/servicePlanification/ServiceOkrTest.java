@@ -2,8 +2,7 @@ package co.com.sofka.okrs.service.servicePlanification;
 
 import co.com.sofka.okrs.domain.Okr;
 import co.com.sofka.okrs.repository.RepositoryOkr;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -17,7 +16,7 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ServiceOkrTest {
 
 
@@ -60,4 +59,23 @@ class ServiceOkrTest {
 
     }
 
+    @Test
+    void deleteOkr(){
+
+        when(repositoryOkr.deleteById("xxx")).thenReturn(Mono.empty());
+        StepVerifier.create(serviceOkr.delete("xxx")).expectNext().verifyComplete();
+    }
+
+    @Test
+    @Order(2)
+    void updateOkr() {
+
+        Okr okr = new Okr("xxx", "terminar curso", "hacer el curso",
+                "daniel", "d@gmail.com", "da", "aaaa", "servicio", 0.14f,
+                List.of());
+
+        when(repositoryOkr.save(okr)).thenReturn(Mono.just(okr));
+        StepVerifier.create(serviceOkr.update(okr)).expectNext(okr).verifyComplete();
+
+    }
 }

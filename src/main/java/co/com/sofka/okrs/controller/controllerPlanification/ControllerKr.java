@@ -29,6 +29,7 @@ public class ControllerKr {
     }
 
     @PutMapping("/updKr")
+    @ResponseStatus(HttpStatus.CREATED)
     public Mono<Kr> update(@RequestBody Kr kr){
         return  userService.update(kr);
     }
