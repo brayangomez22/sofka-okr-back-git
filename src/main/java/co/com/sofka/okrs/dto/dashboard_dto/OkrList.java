@@ -6,9 +6,9 @@ public class OkrList {
 
     private String id;
     private String title;
-    private float okrProgress;
+    private Double okrProgress;
 
-    public OkrList(String id, String title, float okrProgress) {
+    public OkrList(String id, String title, Double okrProgress) {
         this.id = Objects.requireNonNull(id);
         this.title = Objects.requireNonNull(title);
         this.okrProgress = Objects.requireNonNull(okrProgress);
@@ -24,7 +24,7 @@ public class OkrList {
     }
 
 
-    public float getOkrProgress() {
+    public Double getOkrProgress() {
         return okrProgress;
     }
 
@@ -34,7 +34,7 @@ public class OkrList {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OkrList okrList = (OkrList) o;
-        return Float.compare(okrList.okrProgress, okrProgress) == 0 && Objects.equals(id, okrList.id) && Objects.equals(title, okrList.title);
+        return Double.compare(okrList.okrProgress, okrProgress) == 0 && Objects.equals(id, okrList.id) && Objects.equals(title, okrList.title);
     }
 
     @Override

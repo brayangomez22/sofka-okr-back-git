@@ -44,7 +44,7 @@ public class ControladorDashboard {
     }
 
     @GetMapping(value = "dashboard/okrAdvance/{id}")
-    public Mono<Float> findAdvanceOkrByOkrId(@PathVariable("id")String id){
+    public Mono<Double> findAdvanceOkrByOkrId(@PathVariable("id")String id){
         return  dashboardService.findAdvanceOkrByOkrId(Objects.requireNonNull(id));
     }
 

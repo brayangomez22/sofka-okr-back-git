@@ -48,9 +48,9 @@ class AssemblerTest {
                 "xxxx",
                 "Se desea alcanzar unas ganancias de xxx en el trimestre",
                 "Desarrollo",
-                0.7f,
+                0.7D,
                 List.of());
-        OkrList okrListExpected = new OkrList("xxxx", "Ganancias Trimestrales", 0.7f);
+        OkrList okrListExpected = new OkrList("xxxx", "Ganancias Trimestrales", 0.7D);
 
         OkrList okrListActual = Assembler.generateOkrList(okr);
 
@@ -67,7 +67,7 @@ class AssemblerTest {
                 "xxxx",
                 "Se desea alcanzar unas ganancias de xxx en el trimestre",
                 "Desarrollo",
-                0f,
+                0D,
                 List.of());
 
         Assertions.assertThrows(NullPointerException.class, () -> {

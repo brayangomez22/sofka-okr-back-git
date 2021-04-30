@@ -41,7 +41,7 @@ public class DashboardService {
                 .onErrorResume(e->Mono.error(new IllegalArgumentException("El okr no se encuentra registrado")));
     }
 
-    public Mono<Float> findAdvanceOkrByOkrId(String id){
+    public Mono<Double> findAdvanceOkrByOkrId(String id){
         return repositoryOKR.findById(id)
                 .map(Okr::getAdvanceOkr).onErrorResume(e ->Mono.error(new IllegalArgumentException("El okr no se encuentra registrado")));
     }

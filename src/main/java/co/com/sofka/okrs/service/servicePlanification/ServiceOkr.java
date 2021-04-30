@@ -41,19 +41,12 @@ public class ServiceOkr {
 
         Flux<Kr> okrsid = repositoryKr.findAll().filter(x -> x.getOkrId().equals(okr.getId()));
 
-        Mono<Double> porcentaje = (okrsid.collect(Collectors.summingDouble(
+        return  okrsid.collect(Collectors.summingDouble(
                 x -> x.getAdvanceKr() * x.getPercentageWeight()
-        )));
-
-
-        porcentaje.map(n -> {
-            okr.setAdvanceOkr(Float.parseFloat(n.toString()));
-            System.out.println(n);
-        return n;
-        });
-
-        System.out.println(okr.getAdvanceOkr());
-        return repositoryOKr.save(okr);
+        )).flatMap(n ->{
+            okr.setAdvanceOkr(n);
+            return repositoryOKr.save(okr);
+          });
 
     }
 

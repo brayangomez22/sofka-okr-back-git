@@ -48,7 +48,7 @@ class ControllerKrTest {
     @Test
     void findAll() {
         Kr kr = new Kr("0001", "01", "KeyResult1", "Jhovan Espinal",
-                "jhovan@sofkau.com", new Date(), new Date(), 0F, 20F, "descripion");
+                "jhovan@sofkau.com", new Date(), new Date(), 0D, 20D, "descripion");
 
         when(repositoryKr.findAll()).thenReturn(Flux.just(kr));
 
@@ -65,7 +65,7 @@ class ControllerKrTest {
     @Test
     void save() {
         Kr kr = new Kr("0001", "01", "KeyResult1", "Jhovan Espinal",
-                "jhovan@sofkau.com", new Date(), new Date(), 0F, 20F, "descripion");
+                "jhovan@sofkau.com", new Date(), new Date(), 0D, 20D, "descripion");
 
         when(repositoryKr.save(kr)).thenReturn(Mono.just(kr));
 

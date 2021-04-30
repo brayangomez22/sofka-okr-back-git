@@ -31,7 +31,7 @@ class ServiceOkrTest {
     void saveOkr(){
 
         Okr okr = new Okr("xxx","terminar curso","hacer el curso",
-                "daniel","d@gmail.com","da","aaaa","servicio",0.14f,
+                "daniel","d@gmail.com","da","aaaa","servicio",0.14d,
                 List.of());
 
         when(repositoryOkr.save(okr)).thenReturn(Mono.just(okr));
@@ -52,7 +52,7 @@ class ServiceOkrTest {
     void getOkrs(){
 
         Okr okr = new Okr("xxx","tterminar curso","hacer el curso",
-                "daniel","d@gmail.com","da","aaaa","servicio",0.14f,
+                "daniel","d@gmail.com","da","aaaa","servicio",0.14d,
                 List.of());
 
         when(repositoryOkr.findAll()).thenReturn(Flux.just(okr));
@@ -72,7 +72,7 @@ class ServiceOkrTest {
     void updateOkr() {
 
         Okr okr = new Okr("xxx", "terminar curso", "hacer el curso",
-                "daniel", "d@gmail.com", "da", "aaaa", "servicio", 0.14f,
+                "daniel", "d@gmail.com", "da", "aaaa", "servicio", 0.14d,
                 List.of());
 
         when(repositoryOkr.save(okr)).thenReturn(Mono.just(okr));
