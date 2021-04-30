@@ -5,6 +5,8 @@ import co.com.sofka.okrs.repository.RepositoryOkr;
 import co.com.sofka.okrs.service.servicePlanification.ServiceOkr;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
@@ -38,17 +40,17 @@ class ControllerOkrTest {
     private RepositoryOkr repositoryOkr;
 
 
+
     @Test
 
     void getOkr(){
-
         Okr okr = new Okr("xxx","tterminar curso","hacer el curso",
                 "daniel","d@gmail.com","da","aaaa","servicio",0.14f,
                 List.of());
 
-        when(repositoryOkr.findAll()).thenReturn(Flux.just(okr));
+        when(repositoryOkr.findOkrByUserId("da")).thenReturn(Flux.just(okr));
 
-        Flux<Okr> okrListaFlux =  webTestClient.get().uri("/Okrs")
+        Flux<Okr> okrListaFlux =  webTestClient.get().uri("/Okrs/{userId}", "da")
                 .header(HttpHeaders.ACCEPT, "application/json")
                 .exchange()
                 .expectStatus().isOk().returnResult(Okr.class).getResponseBody();
@@ -56,7 +58,8 @@ class ControllerOkrTest {
 
         StepVerifier.create(okrListaFlux).expectNextCount(1).verifyComplete();
 
-        Mockito.verify(repositoryOkr, times(1)).findAll();
+        Mockito.verify(repositoryOkr, times(1)).findOkrByUserId("da");
+
 
     }
 

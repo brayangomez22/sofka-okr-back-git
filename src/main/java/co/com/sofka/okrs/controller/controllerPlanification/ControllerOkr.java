@@ -15,9 +15,10 @@ public class ControllerOkr {
     @Autowired
     private ServiceOkr userService;
 
-    @GetMapping
-    public Flux<Okr> findAll() {
-        return userService.findAll();
+    @GetMapping("/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Flux<Okr> findAll(@PathVariable("userId") String userId) {
+        return userService.findAll(userId);
     }
 
     @PostMapping("/postOkr")

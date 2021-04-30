@@ -14,8 +14,8 @@ public class ServiceOkr{
     @Autowired
     private RepositoryOkr repositoryOKr;
 
-    public Flux<Okr> findAll() {
-        return repositoryOKr.findAll();
+    public Flux<Okr> findAll(String userId) {
+        return repositoryOKr.findOkrByUserId(userId);
     }
 
     public Mono<Okr> save(Okr okr) {
@@ -23,7 +23,6 @@ public class ServiceOkr{
     }
 
     public Mono<Okr> update(Okr okr) {
-        
         return repositoryOKr.save(okr);
     }
 

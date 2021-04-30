@@ -48,9 +48,9 @@ class ServiceKrTest {
         Kr kr = new Kr("0001", "01", "KeyResult1", "Jhovan Espinal",
                 "jhovan@sofkau.com", new Date(), new Date(), 0F, 20F, "descripion");
 
-        when(repositoryKr.findAll()).thenReturn(Flux.just(kr));
+        when(repositoryKr.findByOkrId("01")).thenReturn(Flux.just(kr));
 
-        StepVerifier.create(serviceKr.findAll()).expectNext(kr).verifyComplete();
+        StepVerifier.create(serviceKr.findAll("01")).expectNext(kr).verifyComplete();
 
     }
 

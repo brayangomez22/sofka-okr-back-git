@@ -17,9 +17,9 @@ public class ControllerKr {
     @Autowired
     private ServiceKr userService;
 
-    @GetMapping
-    public Flux<Kr> findAll() {
-        return userService.findAll();
+    @GetMapping("/{okrId}")
+    public Flux<Kr> findAll(@PathVariable("okrId") String okrId) {
+        return userService.findAll(okrId);
     }
 
     @PostMapping("/postKr")

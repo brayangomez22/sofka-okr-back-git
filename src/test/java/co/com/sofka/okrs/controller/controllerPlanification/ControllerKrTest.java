@@ -50,16 +50,16 @@ class ControllerKrTest {
         Kr kr = new Kr("0001", "01", "KeyResult1", "Jhovan Espinal",
                 "jhovan@sofkau.com", new Date(), new Date(), 0F, 20F, "descripion");
 
-        when(repositoryKr.findAll()).thenReturn(Flux.just(kr));
+        when(repositoryKr.findByOkrId("01")).thenReturn(Flux.just(kr));
 
-        Flux<Kr> krListFlux = webTestClient.get().uri("/Krs")
+        Flux<Kr> krListFlux = webTestClient.get().uri("/Krs/{okrId}", "01")
                 .header(HttpHeaders.ACCEPT, "application/json")
                 .exchange()
                 .expectStatus().isOk().returnResult(Kr.class).getResponseBody();
 
         StepVerifier.create(krListFlux).expectNextCount(1).verifyComplete();
 
-        Mockito.verify(repositoryKr, times(1)).findAll();
+        Mockito.verify(repositoryKr, times(1)).findByOkrId("01");
     }
 
     @Test

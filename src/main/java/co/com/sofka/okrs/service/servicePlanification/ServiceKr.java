@@ -14,8 +14,8 @@ public class ServiceKr  {
     @Autowired
     private RepositoryKr repositoryKr;
 
-    public Flux<Kr> findAll() {
-        return repositoryKr.findAll();
+    public Flux<Kr> findAll(String okrId) {
+        return repositoryKr.findByOkrId(okrId);
     }
 
     public Mono<Kr> save(Kr kr) {
