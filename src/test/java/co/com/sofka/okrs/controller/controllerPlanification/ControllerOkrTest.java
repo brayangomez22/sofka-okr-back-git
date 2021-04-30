@@ -5,15 +5,17 @@ import co.com.sofka.okrs.repository.RepositoryOkr;
 import co.com.sofka.okrs.service.servicePlanification.ServiceOkr;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -23,15 +25,15 @@ import reactor.test.StepVerifier;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(SpringExtension.class)
-@WebFluxTest(controllers = ControllerOkr.class)
-@Import(ServiceOkr.class)
-class ControllerOkrTest {
 
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext
+@AutoConfigureWebTestClient
+@ActiveProfiles("test")
+class ControllerOkrTest {
 
     @Autowired
     private WebTestClient webTestClient;
@@ -39,12 +41,9 @@ class ControllerOkrTest {
     @MockBean
     private RepositoryOkr repositoryOkr;
 
-
-
     @Test
-
     void getOkr(){
-        Okr okr = new Okr("xxx","tterminar curso","hacer el curso",
+        Okr okr = new Okr("xxx","terminar curso","hacer el curso",
                 "daniel","d@gmail.com","da","aaaa","servicio",0.14f,
                 List.of());
 
@@ -83,7 +82,6 @@ class ControllerOkrTest {
     @Test
     void deleteOkr(){
 
-
         when(repositoryOkr.deleteById("xxx")).thenReturn(Mono.empty());
 
         webTestClient.delete().uri("/Okrs/deleteOkr".concat("/{id}"),"xxx")
@@ -91,7 +89,6 @@ class ControllerOkrTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(Void.class);
-
     }
 
     @Test

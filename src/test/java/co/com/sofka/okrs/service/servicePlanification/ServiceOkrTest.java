@@ -1,13 +1,22 @@
 package co.com.sofka.okrs.service.servicePlanification;
 
+import co.com.sofka.okrs.controller.controllerPlanification.ControllerOkr;
 import co.com.sofka.okrs.domain.Okr;
 import co.com.sofka.okrs.repository.RepositoryOkr;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
+import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -17,10 +26,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
-
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext
+@AutoConfigureWebTestClient
+@ActiveProfiles("test")
 class ServiceOkrTest {
-
 
     @InjectMocks
     ServiceOkr serviceOkr;
@@ -56,8 +67,8 @@ class ServiceOkrTest {
                 "daniel","d@gmail.com","da","aaaa","servicio",0.14f,
                 List.of());
 
-        when(repositoryOkr.findAll()).thenReturn(Flux.just(okr));
-        StepVerifier.create(serviceOkr.findAll()).expectNext(okr).verifyComplete();
+        when(repositoryOkr.findOkrByUserId("da")).thenReturn(Flux.just(okr));
+        StepVerifier.create(serviceOkr.findAll("da")).expectNext(okr).verifyComplete();
 
     }
 
