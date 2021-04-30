@@ -57,9 +57,9 @@ class DashboardServiceTest {
         when(repositoryOKR.findByUserIdOrderByAdvanceOkrDesc("xxxx")).thenReturn(TestUtils.okrsByUser());
 
         StepVerifier.create(dashboardService.okrByUser("xxxx"))
-                .expectNext(new OkrList("o-xxxxx1", "Ganancias Trimestrales", 0.7f))
-                .expectNext(new OkrList("o-xxxxx3", "Clientes Trimestriales", 0.2f))
-                .expectNext(new OkrList("o-xxxxx2", "Desarrollos Trimestriales", 0f))
+                .expectNext(new OkrList("o-xxxxx1", "Ganancias Trimestrales", 0.7D))
+                .expectNext(new OkrList("o-xxxxx3", "Clientes Trimestriales", 0.2D))
+                .expectNext(new OkrList("o-xxxxx2", "Desarrollos Trimestriales", 0D))
                 .verifyComplete();
     }
 
@@ -95,7 +95,7 @@ class DashboardServiceTest {
     public void findAdvanceOkrByOkrId(){
         when(repositoryOKR.findById("6084801fb2ce1e4174af0245")).thenReturn(TestUtils.getMonoOkr());
         StepVerifier.create(dashboardService.findAdvanceOkrByOkrId("6084801fb2ce1e4174af0245")).
-                expectNext(0.68f).verifyComplete();
+                expectNext(0.68D).verifyComplete();
     }
 
     @Test

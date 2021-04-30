@@ -37,11 +37,5 @@ public class ControllerOkr {
     public Mono<Void> delete(@PathVariable("id") String id){
         return  userService.delete(id);
     }
-
-    @PostMapping("/prueba")
-    public Mono<Okr> prueba(@RequestBody Okr okr){
-      return userService.updateAdvanceOkr(okr);
-    }
-
 }
 

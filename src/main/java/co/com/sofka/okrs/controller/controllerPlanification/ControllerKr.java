@@ -25,18 +25,22 @@ public class ControllerKr {
     @PostMapping("/postKr")
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<Kr> save(@RequestBody Kr kr){
-        return  userService.save(kr);
+
+        if(kr.getPercentageWeight() >= 0 && kr.getPercentageWeight() <=100  ){
+            return userService.filtrarKr(kr.getOkrId(),kr);
+        }
+        return Mono.empty();
     }
 
     @PutMapping("/updKr")
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<Kr> update(@RequestBody Kr kr){
-        return  userService.update(kr);
+
+       return userService.update(kr);
     }
 
     @DeleteMapping("/deleteKr/{id}")
     public Mono<Void> delete(@PathVariable("id") String id){
         return  userService.delete(id);
     }
-
 }
