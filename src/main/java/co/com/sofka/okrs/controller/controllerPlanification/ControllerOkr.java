@@ -15,9 +15,10 @@ public class ControllerOkr {
     @Autowired
     private ServiceOkr userService;
 
-    @GetMapping
-    public Flux<Okr> findAll() {
-        return userService.findAll();
+    @GetMapping("/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Flux<Okr> findAll(@PathVariable("userId") String userId) {
+        return userService.findAll(userId);
     }
 
     @PostMapping("/postOkr")
@@ -26,5 +27,15 @@ public class ControllerOkr {
         return userService.save(okr);
     }
 
+    @PutMapping("/updOkr")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Mono<Okr> update(@RequestBody Okr okr){
+        return  userService.update(okr);
+    }
 
+    @DeleteMapping("/deleteOkr/{id}")
+    public Mono<Void> delete(@PathVariable("id") String id){
+        return  userService.delete(id);
+    }
 }
+

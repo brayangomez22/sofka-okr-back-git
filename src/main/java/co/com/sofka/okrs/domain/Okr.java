@@ -23,6 +23,7 @@ public class Okr {
     private List<HistoricalAdvance> historicalOkr;
 
 
+
     public Okr(String id, String title, String objective, String personInChargeNameOkr, String personInChargeEmailOkr, String userId, String descriptionOkr, String vertical, Double advanceOkr, List<HistoricalAdvance> historicalOkr) {
         this.id = id;
         this.title = title;
