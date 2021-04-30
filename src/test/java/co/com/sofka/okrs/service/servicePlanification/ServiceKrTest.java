@@ -54,4 +54,19 @@ class ServiceKrTest {
 
     }
 
+    @Test
+    void update(){
+        Kr kr = new Kr("0002", "01", "primero", "Persona 1",
+                "persona1@sofkau.com", new Date(), new Date(), 0D, 20D, "descripion");
+        when(serviceKr.update(kr)).thenReturn(Mono.just(kr));
+
+        StepVerifier.create(serviceKr.update(kr)).expectNext(kr).verifyComplete();
+    }
+
+    @Test
+    void delete(){
+        when(serviceKr.delete("0002")).thenReturn(Mono.empty());
+        StepVerifier.create(serviceKr.delete("0002")).verifyComplete();
+    }
+
 }
