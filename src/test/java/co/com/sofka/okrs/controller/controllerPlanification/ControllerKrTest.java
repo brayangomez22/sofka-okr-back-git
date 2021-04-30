@@ -60,26 +60,19 @@ class ControllerKrTest {
     private RepositoryKr repositoryKr;
 
     @Test
-    @Order(4)
     void findAll() {
         Kr kr = new Kr("0001", "01", "KeyResult1", "Jhovan Espinal",
-                "jhovan@sofkau.com", new Date(), new Date(), 0D, 20D, "descripion");
+                "jhovan@sofkau.com", new Date(), new Date(), 45d, 20d, "descripion");
 
-        when(repositoryKr.findByOkrId("01")).thenReturn(Flux.just(kr));
+        when(serviceKr.findAll("01")).thenReturn(Flux.just(kr));
 
-        Flux<Kr> krListFlux = webTestClient.get().uri("/Krs/{okrId}", "01")
-                .header(HttpHeaders.ACCEPT, "application/json")
-                .exchange()
-                .expectStatus().isOk().returnResult(Kr.class).getResponseBody();
-
-        StepVerifier.create(krListFlux).expectNextCount(1).verifyComplete();
-
-        Mockito.verify(repositoryKr, times(1)).findByOkrId("01");
+        webTestClient.get().uri("/Krs/".concat("{okrId}"), "01").exchange().expectStatus().isOk()
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBody();
     }
 
 
     @Test
-    @Order(5)
     void save() {
         Kr kr = new Kr("0001", "01", "KeyResult1", "Jhovan Espinal",
                 "jhovan@sofkau.com", new Date(), new Date(), 45d, 20d, "descripion");
@@ -109,18 +102,18 @@ class ControllerKrTest {
     }
 
     @Test
-    @Order(3)
     void updateKr() {
-
         Kr kr = new Kr("0001", "01", "KeyResult1", "Jhovan Espinal",
-                "jhovan@sofkau.com", new Date(), new Date(), 0D, 20D, "descripion");
+                "jhovan@sofkau.com", new Date(), new Date(), 45d, 20d, "descripion");
 
+        when(serviceKr.filtrarKr("0001", kr)).thenReturn(Mono.just(kr));
         when(repositoryKr.save(kr)).thenReturn(Mono.just(kr));
 
-        webTestClient.put().uri("/Krs/updKr").contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromObject(kr)).exchange().expectStatus().isCreated();
-
-        Mockito.verify(repositoryKr, times(1)).save(kr);
+        webTestClient.put().uri("/Krs/updKr").contentType(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE))
+                .body(Mono.just(kr), Kr.class)
+                .exchange()
+                .expectStatus().isCreated()
+                .expectBody(Kr.class);
     }
 
 }
