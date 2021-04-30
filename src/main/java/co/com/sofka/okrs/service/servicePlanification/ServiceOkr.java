@@ -36,17 +36,5 @@ public class ServiceOkr {
         return repositoryOKr.deleteById(id);
     }
 
-    public Mono<Okr> updateAdvanceOkr(Okr okr) {
-
-        Flux<Kr> okrsid = repositoryKr.findAll().filter(x -> x.getOkrId().equals(okr.getId()));
-
-        return  okrsid.collect(Collectors.summingDouble(
-                x -> x.getAdvanceKr() * x.getPercentageWeight()
-        )).flatMap(n ->{
-            okr.setAdvanceOkr(n);
-            return repositoryOKr.save(okr);
-          });
-
-    }
 
 }
