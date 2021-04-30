@@ -6,9 +6,9 @@ public class KrTable {
 
     private String keyResult;
     private String personInChargeNameKr;
-    private Float advanceKr;
+    private Double advanceKr;
 
-    public KrTable(String keyResult, String personInChargeNameKr, Float advanceKr) {
+    public KrTable(String keyResult, String personInChargeNameKr, Double advanceKr) {
         this.keyResult = keyResult;
         this.personInChargeNameKr = personInChargeNameKr;
         this.advanceKr = advanceKr;
@@ -25,7 +25,7 @@ public class KrTable {
 
 
 
-    public Float getAdvanceKr() {
+    public Double getAdvanceKr() {
         return advanceKr;
     }
 

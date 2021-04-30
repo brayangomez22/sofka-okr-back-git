@@ -36,11 +36,11 @@ public class CalendarService {
     }
 
     public Flux<Event> loadFilter(String email) throws GeneralSecurityException, IOException {
-        var calendarService = calendarService();
-        var list = calendarService.events().list("primary").execute().getItems();
+        Calendar calendarService = calendarService();
+        List<Event> list = calendarService.events().list("primary").execute().getItems();
         Flux<Event> eventFlux = Flux.fromIterable(list).map(event -> {
             Boolean band = false;
-            var list2 = event.getAttendees();
+            List<EventAttendee> list2 = event.getAttendees();
             for (EventAttendee eventAttendee: list2){
                 if(eventAttendee.getEmail().equals(email)){
                     band = true;
@@ -55,7 +55,7 @@ public class CalendarService {
 
     public Mono<Void> delete(String id) throws GeneralSecurityException, IOException {
         System.out.println(id);
-        var calendarService = calendarService();
+        Calendar calendarService = calendarService();
         calendarService.events().delete("primary",id).setSendNotifications(true).execute();
         return Mono.empty();
     }
@@ -95,7 +95,7 @@ public class CalendarService {
         event = service.events().insert(calendarId, finalEvent).setSendNotifications(true).setConferenceDataVersion(1).execute();
         //System.out.printf("Event created: %s\n", event.getHtmlLink());
 
-        return Mono.just(event);
+        return Mono.just(event).onErrorResume(e-> Mono.error(new IllegalArgumentException("recticar la informacion")));
     }
 
     private ConferenceData getConferenceData() {
@@ -120,7 +120,7 @@ public class CalendarService {
     }
 
     private Events calendarEvents(DateTime dateTime) throws GeneralSecurityException, IOException {
-        var calendarService = calendarService();
+        Calendar calendarService = calendarService();
         // List the next 10 events from the primary calendar.
         Events events = calendarService.events().list("primary")
                 .setMaxResults(10)

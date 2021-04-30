@@ -3,6 +3,7 @@ package co.com.sofka.okrs.domain.calendarDomain;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class EventCalendar {
     public static EventCalendar DEFAULT_EVENT_CALENDAR = new EventCalendar("default", "event default", "colombia", LocalDate.now().toString(), "06:00:00", "12:00:00", List.of("thisaexample@gmail.com", "Sofka.OKR@gmail.com", "Sofka.OKR@gmail.com"));
@@ -16,13 +17,13 @@ public class EventCalendar {
     private List<String> emails;
 
     public EventCalendar(String title, String description, String location, String date, String startTime, String endTime, List<String> emails) {
-        this.title = title;
-        this.description = description;
+        this.title = Objects.requireNonNull(title, "title is required");
+        this.description = Objects.requireNonNull(description, "description is required");;
         this.location = location;
-        this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.emails = emails;
+        this.date = Objects.requireNonNull(date, "date is required in format: YYYY-MM-DD");
+        this.startTime = Objects.requireNonNull(startTime, "startTime is required");
+        this.endTime = Objects.requireNonNull(endTime, "endTime is required");
+        this.emails = Objects.requireNonNull(emails, "emails are required");
     }
 
     public String getDate() {

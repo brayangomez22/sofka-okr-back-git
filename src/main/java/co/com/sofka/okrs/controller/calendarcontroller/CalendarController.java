@@ -15,6 +15,7 @@ import java.security.GeneralSecurityException;
 
 @RestController
 @RequestMapping("/calendar")
+@CrossOrigin("*")
 public class CalendarController {
 
     @Autowired

@@ -14,6 +14,7 @@ import com.google.api.services.calendar.CalendarScopes;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.List;
@@ -29,12 +30,12 @@ public class CalendarUtil {
 
 
     public static Credential getCredentials(final NetHttpTransport HTTP_TRANSPO) throws IOException {
-        var clientSecrets = loadClientSecrets();
+      GoogleClientSecrets  clientSecrets = loadClientSecrets();
         return triggerUserAuthorization(HTTP_TRANSPO, clientSecrets);
     }
 
     private static GoogleClientSecrets loadClientSecrets() throws IOException {
-        var in = CalendarUtil.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+      InputStream in = CalendarUtil.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
         if(in == null){
             throw new FileNotFoundException("Resource not found: $CREDENTIALS_FILE_PATH");
         }
@@ -46,7 +47,7 @@ public class CalendarUtil {
     }
 
     private static Credential triggerUserAuthorization(final NetHttpTransport HTTP_TRANSPORT, GoogleClientSecrets clientSecrets) throws IOException {
-        var flow = new GoogleAuthorizationCodeFlow.Builder(
+       GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
                 HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
                 .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
                 .setAccessType("offline")

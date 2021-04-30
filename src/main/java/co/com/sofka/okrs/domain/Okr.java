@@ -19,11 +19,11 @@ public class Okr {
     private String descriptionOkr;
     private String vertical;
     private Date startDate;
-    private Float advanceOkr;
+    private Double advanceOkr;
     private List<HistoricalAdvance> historicalOkr;
 
 
-    public Okr(String id, String title, String objective, String personInChargeNameOkr, String personInChargeEmailOkr, String userId, String descriptionOkr, String vertical, Float advanceOkr, List<HistoricalAdvance> historicalOkr) {
+    public Okr(String id, String title, String objective, String personInChargeNameOkr, String personInChargeEmailOkr, String userId, String descriptionOkr, String vertical, Double advanceOkr, List<HistoricalAdvance> historicalOkr) {
         this.id = id;
         this.title = title;
         this.objective = objective;
@@ -109,11 +109,11 @@ public class Okr {
         this.startDate = startDate;
     }
 
-    public Float getAdvanceOkr() {
+    public Double getAdvanceOkr() {
         return advanceOkr;
     }
 
-    public void setAdvanceOkr(Float advanceOkr) {
+    public void setAdvanceOkr(Double advanceOkr) {
         this.advanceOkr = advanceOkr;
     }
 

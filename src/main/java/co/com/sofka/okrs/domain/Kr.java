@@ -15,8 +15,8 @@ public class Kr {
     private String personInChargeEmailKr;
     private Date startDate;
     private Date finishDate;
-    private Float advanceKr;
-    private Float percentageWeight;
+    private Double advanceKr;
+    private Double percentageWeight;
     private String descriptionKr;
 
     public Kr(String id,
@@ -26,8 +26,8 @@ public class Kr {
               String personInChargeEmailKr,
               Date startDate,
               Date finishDate,
-              Float advanceKr,
-              Float percentageWeight,
+              Double advanceKr,
+              Double percentageWeight,
               String descriptionKr)
     {
         this.id = id;
@@ -98,19 +98,19 @@ public class Kr {
         this.finishDate = finishDate;
     }
 
-    public Float getAdvanceKr() {
+    public Double getAdvanceKr() {
         return advanceKr;
     }
 
-    public void setAdvanceKr(Float advanceKr) {
+    public void setAdvanceKr(Double advanceKr) {
         this.advanceKr = advanceKr;
     }
 
-    public Float getPercentageWeight() {
+    public Double getPercentageWeight() {
         return percentageWeight;
     }
 
-    public void setPercentageWeight(Float percentageWeight) {
+    public void setPercentageWeight(Double percentageWeight) {
         this.percentageWeight = percentageWeight;
     }
 

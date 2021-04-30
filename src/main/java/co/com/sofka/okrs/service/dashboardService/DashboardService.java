@@ -1,8 +1,6 @@
 package co.com.sofka.okrs.service.dashboardService;
 
-import co.com.sofka.okrs.dto.dashboard_dto.OkrList;
-import co.com.sofka.okrs.dto.dashboard_dto.OkrTable;
-import co.com.sofka.okrs.dto.dashboard_dto.UserView;
+import co.com.sofka.okrs.dto.dashboard_dto.*;
 import co.com.sofka.okrs.domain.Okr;
 import co.com.sofka.okrs.repository.RepositoryKr;
 import co.com.sofka.okrs.repository.RepositoryOkr;
@@ -41,11 +39,29 @@ public class DashboardService {
                 .onErrorResume(e->Mono.error(new IllegalArgumentException("El okr no se encuentra registrado")));
     }
 
-    public Mono<Float> findAdvanceOkrByOkrId(String id){
+    public Mono<Double> findAdvanceOkrByOkrId(String id){
         return repositoryOKR.findById(id)
-                .map(okr -> {
-                    okr.setAdvanceOkr(okr.getAdvanceOkr()*100);
-                    return okr.getAdvanceOkr();
-                }).onErrorResume(e ->Mono.error(new IllegalArgumentException("El okr no se encuentra registrado")));
+                .map(Okr::getAdvanceOkr).onErrorResume(e ->Mono.error(new IllegalArgumentException("El okr no se encuentra registrado")));
     }
+
+    public Flux<PieKr> findAdvanceKrsByOkrId(String id){
+        PieKr pieKr = new PieKr();
+        return  repositoryKr.findByOkrId(id).map(kr -> {
+            pieKr.setAdvanceKr((kr.getAdvanceKr()*kr.getPercentageWeight())/100);
+            pieKr.setKeyResult(kr.getKeyResult());
+            return pieKr;}).onErrorResume(e ->Mono.error(new IllegalArgumentException("El okr no se encuentra registrado")));
+    }
+
+    public Mono<OkrBurnDownChart> generateBurnDownData(String id){
+        return Mono.zip(repositoryOKR.findById(id), repositoryKr.findFirstByOkrIdOrderByFinishDate(id), repositoryKr.findFirstByOkrIdOrderByFinishDateDesc(id))
+                .map(element -> Assembler.generateBurnDownData(element.getT1(), element.getT2(), element.getT3()))
+                .onErrorResume(e -> Mono.error(new IllegalArgumentException("There are no Okrs or Krs registered related to that ID")));
+    }
+
+    public Mono<OkrBarChart> generateBarChartData(String id){
+        return Mono.zip(repositoryOKR.findById(id), repositoryKr.findFirstByOkrIdOrderByFinishDate(id), repositoryKr.findFirstByOkrIdOrderByFinishDateDesc(id))
+                .map(element -> Assembler.generateBarChartData(element.getT1(), element.getT2(), element.getT3()))
+                .onErrorResume(e -> Mono.error(new IllegalArgumentException("There are no Okrs or Krs registered related to that ID")));
+    }
+
 }
