@@ -3,6 +3,7 @@ package co.com.sofka.okrs.service.administrationService;
 import co.com.sofka.okrs.domain.User;
 import co.com.sofka.okrs.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -14,7 +15,9 @@ public class UserServiceOKR {
     private UserRepository repository;
 
     public Mono<User> save(User user){
-        Mono<User> user1 = repository.findById(user.getId());
-        return repository.save(Objects.requireNonNull(user));
+
+        return repository.findById(user.getId()).switchIfEmpty(repository.save(user));
     }
+
+
 }

@@ -27,6 +27,7 @@ class UserServiceOKRTest {
     @Test
     void saveUser(){
         User user = new User("xxx","Felipe","juan@example.com");
+        when(userRepository.findById("xxx")).thenReturn(Mono.empty());
         when(userRepository.save(user)).thenReturn(Mono.just(user));
         StepVerifier.create(userServiceOKR.save(user)).expectNext(user).verifyComplete();
     }

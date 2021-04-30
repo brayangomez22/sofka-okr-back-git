@@ -100,4 +100,17 @@ public class User {
     public int hashCode() {
         return Objects.hash(id, name, email, mailCompletedOkr, mailCompletedKr, notificationCompletedKr, notificationCompletedOkr);
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", mailCompletedOkr=" + mailCompletedOkr +
+                ", mailCompletedKr=" + mailCompletedKr +
+                ", notificationCompletedKr=" + notificationCompletedKr +
+                ", notificationCompletedOkr=" + notificationCompletedOkr +
+                '}';
+    }
 }
