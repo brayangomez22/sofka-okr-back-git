@@ -77,7 +77,7 @@ class ControllerKrTest {
         Kr kr = new Kr("0001", "01", "KeyResult1", "Jhovan Espinal",
                 "jhovan@sofkau.com", new Date(), new Date(), 45d, 20d, "descripion");
 
-        when(serviceKr.filtrarKr("0001", kr)).thenReturn(Mono.just(kr));
+        when(serviceKr.save( kr)).thenReturn(Mono.just(kr));
         when(repositoryKr.save(kr)).thenReturn(Mono.just(kr));
 
         webTestClient.post().uri("/Krs/postKr").contentType(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE))
@@ -106,7 +106,7 @@ class ControllerKrTest {
         Kr kr = new Kr("0001", "01", "KeyResult1", "Jhovan Espinal",
                 "jhovan@sofkau.com", new Date(), new Date(), 45d, 20d, "descripion");
 
-        when(serviceKr.filtrarKr("0001", kr)).thenReturn(Mono.just(kr));
+        when(serviceKr.save( kr)).thenReturn(Mono.just(kr));
         when(repositoryKr.save(kr)).thenReturn(Mono.just(kr));
 
         webTestClient.put().uri("/Krs/updKr").contentType(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE))

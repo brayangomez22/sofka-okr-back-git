@@ -34,23 +34,4 @@ public class ServiceKr {
     }
 
 
-    public Mono<Kr> filtrarKr(String id,Kr kr) {
-
-      return   repositoryKr.findAll().filter(n -> n.getOkrId().equals(id))
-                .collect(Collectors.summingDouble(
-                        x -> x.getPercentageWeight()
-                )).flatMap( n ->{
-
-                    if(kr.getPercentageWeight() + n > 100){
-                        new IllegalAccessException("El valor no es permitido");
-                        return Mono.empty();
-                    }else {
-                        return repositoryKr.save(kr);
-
-                }
-
-        });
-
-
-    }
 }
