@@ -14,6 +14,7 @@ import reactor.test.StepVerifier;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -55,8 +56,28 @@ class ServiceOkrTest {
                 "daniel","d@gmail.com","da","aaaa","servicio",0.14f,
                 List.of());
 
-        when(repositoryOkr.findOkrByUserId("da")).thenReturn(Flux.just(okr));
-        StepVerifier.create(serviceOkr.findAll("da")).expectNext(okr).verifyComplete();
+        when(repositoryOkr.findAll()).thenReturn(Flux.just(okr));
+        StepVerifier.create(serviceOkr.findAll()).expectNext(okr).verifyComplete();
+
+    }
+
+    @Test
+    void deleteOkr(){
+
+        when(repositoryOkr.deleteById("xxx")).thenReturn(Mono.empty());
+        StepVerifier.create(serviceOkr.delete("xxx")).expectNext().verifyComplete();
+    }
+
+    @Test
+    @Order(2)
+    void updateOkr() {
+
+        Okr okr = new Okr("xxx", "terminar curso", "hacer el curso",
+                "daniel", "d@gmail.com", "da", "aaaa", "servicio", 0.14f,
+                List.of());
+
+        when(repositoryOkr.save(okr)).thenReturn(Mono.just(okr));
+        StepVerifier.create(serviceOkr.update(okr)).expectNext(okr).verifyComplete();
 
     }
 

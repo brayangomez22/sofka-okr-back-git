@@ -79,4 +79,33 @@ class ControllerOkrTest {
 
     }
 
+
+    @Test
+    void deleteOkr(){
+
+
+        when(repositoryOkr.deleteById("xxx")).thenReturn(Mono.empty());
+
+        webTestClient.delete().uri("/Okrs/deleteOkr".concat("/{id}"),"xxx")
+                .accept(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE))
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(Void.class);
+
+    }
+
+    @Test
+    void updateOkr() {
+
+        Okr okr = new Okr("xxx", "terminar curso", "hacer el curso",
+                "daniel", "d@gmail.com", "da", "aaaa", "servicio", 0.14f,
+                List.of());
+
+        when(repositoryOkr.save(okr)).thenReturn(Mono.just(okr));
+
+        webTestClient.put().uri("/Okrs/updOkr").contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromObject(okr)).exchange().expectStatus().isCreated();
+
+        Mockito.verify(repositoryOkr, times(1)).save(okr);
+    }
 }
